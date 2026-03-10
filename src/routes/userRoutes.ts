@@ -1,24 +1,16 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
+import { createUser, deleteUser, getAllUsers, getUserById, modifyUser } from '../controllers/userControler';
+
 const userRouter:Router = Router();
 
-userRouter.get('/', (req:Request, res:Response) => {
-    res.send('Get a list of users')
-});
+userRouter.get('/', getAllUsers);
 
-userRouter.get('/:id',(req:Request, res:Response) => {
-    res.send(`Get the user ${req.params.id}`)
-});
+userRouter.get('/:id', getUserById);
 
-userRouter.post('/', (req:Request, res:Response) => {
-    res.send(`Create a new user with ID: ${req.body.id}`)
-});
+userRouter.post('/', createUser);
 
-userRouter.patch('/:id', (req:Request, res:Response) => {
-    res.send(`Update the user ${req.params.id} with the values of ${req.body.name}, ${req.body.email}, ${req.body.password}, ${req.body.isAdmin}`)
-});
+userRouter.patch('/:id', modifyUser);
 
-userRouter.delete('/', (req:Request, res:Response) => {
-    res.send(`Deleting the user ${req.body.id}`)
-});
+userRouter.delete('/', deleteUser);
 
 export default userRouter;
