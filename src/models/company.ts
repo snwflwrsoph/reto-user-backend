@@ -1,5 +1,6 @@
-import { Table, Model, Column, CreatedAt, UpdatedAt, DataType } from  'sequelize-typescript';
+import { Table, Model, Column, CreatedAt, UpdatedAt, DataType, HasMany } from  'sequelize-typescript';
 import { Optional } from 'sequelize';
+import { User } from './user';
 
 interface CompanyAttributes{
     id: number;
@@ -35,4 +36,8 @@ export class Company extends Model<CompanyAttributes, CompanyCreationAttributes>
     @UpdatedAt
     @Column
     updatedAt!: Date;
+
+    @HasMany(() => User)
+    declare users?: User[];
+
 }

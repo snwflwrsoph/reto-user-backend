@@ -1,5 +1,6 @@
 import { RequestHandler, Request, Response } from "express";
 import { User } from "../models/user";
+import { Company } from "../models/company";
 
 // Create and Save a new user
 export const createUser: RequestHandler = (req:Request, res:Response) => {
@@ -31,7 +32,10 @@ export const createUser: RequestHandler = (req:Request, res:Response) => {
 
 // Retrieve all users from the database
 export const getAllUsers: RequestHandler = (req:Request, res:Response) => {
-    User.findAll()
+    User.findAll({
+        attributes: { exclude: ["companyId"] },
+        include: [{ model: Company, attributes: ["id", "name"] }],
+    })
     .then((data: User[]) => {
         return res.status(200).json({
             status:"success",

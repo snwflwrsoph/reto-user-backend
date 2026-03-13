@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
+const company_1 = require("./company");
 let User = class User extends sequelize_typescript_1.Model {
 };
 exports.User = User;
@@ -30,6 +31,18 @@ __decorate([
     sequelize_typescript_1.Column,
     __metadata("design:type", Boolean)
 ], User.prototype, "isAdmin", void 0);
+__decorate([
+    (0, sequelize_typescript_1.ForeignKey)(() => company_1.Company),
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+        allowNull: true,
+    }),
+    __metadata("design:type", Object)
+], User.prototype, "userId", void 0);
+__decorate([
+    (0, sequelize_typescript_1.BelongsTo)(() => company_1.Company, { foreignKey: "CompanyId" }),
+    __metadata("design:type", Object)
+], User.prototype, "company", void 0);
 __decorate([
     sequelize_typescript_1.CreatedAt,
     sequelize_typescript_1.Column,
