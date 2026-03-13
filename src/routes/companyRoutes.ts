@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 const companyRouter:Router = Router();
 
 companyRouter.get('/', (req:Request, res:Response) => {
-    res.send('Get a list og companies')
+    res.send('Get a list of companies')
 });
 
 companyRouter.get('/:id', (req:Request, res:Response) => {

@@ -14,6 +14,6 @@ app.use(express_1.default.json());
 app.use(routes_1.default);
 (0, connection_1.default)();
 app.listen(port, () => {
-    console.log(`User panel app listening on port ${port}`);
+    console.log(`User and Company panel app listening on port ${port}`);
 });
 //# sourceMappingURL=index.js.map

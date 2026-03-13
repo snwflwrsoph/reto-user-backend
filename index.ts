@@ -13,5 +13,5 @@ app.use(apiRouter);
 connectionDB();
 
 app.listen(port, () => {
-    console.log(`User panel app listening on port ${port}`)
+    console.log(`User and Company panel app listening on port ${port}`)
 })
