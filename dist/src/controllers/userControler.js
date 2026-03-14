@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.modifyUser = exports.getUserById = exports.getAllUsers = exports.createUser = void 0;
 const user_1 = require("../models/user");
+const company_1 = require("../models/company");
 // Create and Save a new user
 const createUser = (req, res) => {
     //Validate request
@@ -41,7 +42,10 @@ const createUser = (req, res) => {
 exports.createUser = createUser;
 // Retrieve all users from the database
 const getAllUsers = (req, res) => {
-    user_1.User.findAll()
+    user_1.User.findAll({
+        attributes: { exclude: ["companyId"] },
+        include: [{ model: company_1.Company, attributes: ["id", "name"] }],
+    })
         .then((data) => {
         return res.status(200).json({
             status: "success",

@@ -38,9 +38,9 @@ __decorate([
         allowNull: true,
     }),
     __metadata("design:type", Object)
-], User.prototype, "userId", void 0);
+], User.prototype, "companyId", void 0);
 __decorate([
-    (0, sequelize_typescript_1.BelongsTo)(() => company_1.Company, { foreignKey: "CompanyId" }),
+    (0, sequelize_typescript_1.BelongsTo)(() => company_1.Company, { foreignKey: "companyId" }),
     __metadata("design:type", Object)
 ], User.prototype, "company", void 0);
 __decorate([

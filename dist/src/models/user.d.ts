@@ -16,7 +16,7 @@ export declare class User extends Model<UserAttributes, UserCreationAttributes> 
     email: string;
     password: string;
     isAdmin: boolean;
-    userId: number | null;
+    companyId: number | null;
     company?: Company | null;
     createdAt: Date;
     updatedAt: Date;
