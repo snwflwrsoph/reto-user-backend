@@ -9,102 +9,98 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.modifyUser = exports.getUserById = exports.getAllUsers = exports.createUser = void 0;
-const user_1 = require("../models/user");
+exports.deleteCompany = exports.modifyCompany = exports.getCompanyById = exports.getAllCompanies = exports.createCompany = void 0;
 const company_1 = require("../models/company");
-// Create and Save a new user
-const createUser = (req, res) => {
-    //Validate request
+// Create and Save a new Company
+const createCompany = (req, res) => {
+    // Validate request
     if (!req.body) {
         return res.status(400).json({
-            status: "error",
+            status: "Error",
             message: "Content can not be empty",
             payload: null,
         });
     }
-    const user = Object.assign({}, req.body);
-    user_1.User.create(user)
+    // Save company in db
+    const company = Object.assign({}, req.body);
+    company_1.Company.create(company)
         .then((data) => {
         res.status(200).json({
             status: "Success",
-            message: "USer successfully created",
+            message: "Company successfully created",
             payload: data,
         });
     })
         .catch((err) => {
         res.status(500).json({
-            status: "error",
-            message: "Something happened while creating a user. " + err.message,
-            payload: null,
-        });
-    });
-};
-exports.createUser = createUser;
-// Retrieve all users from the database
-const getAllUsers = (req, res) => {
-    user_1.User.findAll({
-        attributes: { exclude: ["companyId"] },
-        include: [{ model: company_1.Company, attributes: ["id", "name"] }],
-    })
-        .then((data) => {
-        return res.status(200).json({
-            status: "success",
-            message: "Users successfully retrieved",
-            payload: data,
-        });
-    })
-        .catch((err) => {
-        return res.status(500).json({
             status: "Error",
-            message: "Something happened while retrieving all user. " + err.message,
+            message: "Something happened while creating a company. " + err.message,
             payload: null,
         });
     });
 };
-exports.getAllUsers = getAllUsers;
-//Find a single user with an id
-const getUserById = (req, res) => {
-    user_1.User.findByPk(Number(req.params.id))
+exports.createCompany = createCompany;
+// Retrieve all companies from db
+const getAllCompanies = (req, res) => {
+    company_1.Company.findAll()
         .then((data) => {
         return res.status(200).json({
             status: "Success",
-            message: "User successfully retrieved",
+            message: "Companies successfully retrieved",
             payload: data,
         });
     })
         .catch((err) => {
         return res.status(500).json({
             status: "Error",
-            message: "Something happened while retrieving user. " + err.message,
+            message: "Something happened while retrieving all companies. " + err.message,
             payload: null,
         });
     });
 };
-exports.getUserById = getUserById;
-//Update user by the id in the request
-const modifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //Validate req
+exports.getAllCompanies = getAllCompanies;
+// Find a single company with an id
+const getCompanyById = (req, res) => {
+    company_1.Company.findByPk(Number(req.params.id))
+        .then((data) => {
+        return res.status(200).json({
+            status: "Success",
+            message: "Company successfully retrieved",
+            payload: data,
+        });
+    })
+        .catch((err) => {
+        return res.status(500).json({
+            status: "Error",
+            message: "Something happened while retrieving a product. " + err.message,
+            payload: null,
+        });
+    });
+};
+exports.getCompanyById = getCompanyById;
+// Update a company by the id in the request
+const modifyCompany = (req, res) => {
+    // Validate req
     if (!req.body) {
         return res.status(400).json({
-            status: "error",
-            message: "Content can not be empty.",
+            status: "Error",
+            message: "Content can not be empty",
             payload: null,
         });
     }
-    //save user
-    user_1.User.update(Object.assign({}, req.body), { where: { id: req.params.id } })
+    company_1.Company.update(Object.assign({}, req.body), { where: { id: req.params.id } })
         .then((isUpdated) => {
         if (isUpdated) {
             return res.status(200).json({
-                status: "success",
-                message: "User successfully updated",
+                status: "Success",
+                message: "Company successfully updated",
                 payload: Object.assign({}, req.body),
             });
         }
         else {
             return res.status(500).json({
                 status: "Error",
-                message: "Something happened while updating the user.",
+                message: "Something happened while updating the company.",
                 payload: null,
             });
         }
@@ -112,25 +108,25 @@ const modifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         .catch((err) => {
         res.status(500).json({
             status: "Error",
-            message: "Something happened while updating a user. " + err.message,
+            message: "Something happened while updating the company. " + err.message,
             payload: null,
         });
     });
-});
-exports.modifyUser = modifyUser;
-//Delete a user with the specific id in the request
-const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+};
+exports.modifyCompany = modifyCompany;
+// Delete a company with the specified id in the request
+const deleteCompany = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.body;
     try {
-        yield user_1.User.destroy({ where: { id } });
-        res.status(200).json({ message: "User deleted" });
+        yield company_1.Company.destroy({ where: { id } });
+        res.status(200).json({ message: "Company deleted" });
     }
     catch (error) {
         res.status(500).json({
-            message: "Error deleting user",
+            message: "Error deleting company",
             error,
         });
     }
 });
-exports.deleteUser = deleteUser;
-//# sourceMappingURL=userControler.js.map
+exports.deleteCompany = deleteCompany;
+//# sourceMappingURL=companyControler.js.map

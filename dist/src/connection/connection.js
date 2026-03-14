@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
 const user_1 = require("../models/user");
+const company_1 = require("../models/company");
 const connection = new sequelize_typescript_1.Sequelize({
     database: 'user_admin_db',
     dialect: 'postgres',
@@ -18,7 +19,7 @@ const connection = new sequelize_typescript_1.Sequelize({
     password: 'HDK#$%Ljkwerff.89',
     host: 'localhost',
     port: 5432,
-    models: [user_1.User]
+    models: [user_1.User, company_1.Company]
 });
 function connectionDB() {
     return __awaiter(this, void 0, void 0, function* () {
